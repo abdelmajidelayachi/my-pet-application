@@ -1,4 +1,4 @@
-package com.example.cvtheme.config;
+package com.example.mypet.security;
 
 
 import org.springframework.security.core.userdetails.UserDetails;

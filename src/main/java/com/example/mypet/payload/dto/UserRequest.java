@@ -1,2 +1,20 @@
-package com.example.mypet.playload.dto;public class UserRequest {
+package com.example.mypet.payload.dto;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class UserRequest {
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String password;
+    private String confirmPassword;
+    private String username;
+    private String phone;
+    private String adoptedPets;
+    private int numberOfPets;
 }

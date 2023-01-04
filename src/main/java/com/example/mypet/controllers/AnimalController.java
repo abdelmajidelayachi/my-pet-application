@@ -1,2 +1,11 @@
-package com.example.mypet.controllers;public class AnimalController {
+package com.example.mypet.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/animal")
+public class AnimalController {
+
+
 }

@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mypet
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3307:3306"
+    volumes:
+        - ./db:/var/lib/mysql
+  phpMyAdmin:
+      image: phpmyadmin
+      restart: always
+      ports:
+        - 8089:80
+      environment:
+        PMA_HOST: db
+        PMA_PORT: 3306
+        PMA_USER: root
+        PMA_PASSWORD: admin
+      depends_on:
+        - db
+  api:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "8085:9000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3307/mypet
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop

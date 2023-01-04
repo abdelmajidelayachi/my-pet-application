@@ -15,7 +15,6 @@ import java.util.Map;
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -33,6 +32,7 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> test() {
         return ResponseEntity.ok().body(Map.of("status", "success", "data", "test"));
     }
+
     @PostMapping
     public ResponseEntity<Map<String, Object>> createUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok().body(Map.of("status", "success", "data", userService.saveUser(userRequest)));

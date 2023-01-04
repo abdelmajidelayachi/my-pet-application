@@ -4,11 +4,15 @@ import com.example.mypet.entities.User;
 import com.example.mypet.payload.dao.UserResponse;
 import com.example.mypet.payload.dto.UserRequest;
 import com.example.mypet.payload.objectmapper.UserMapper;
+import com.example.mypet.repositories.ResponseRepository;
 import com.example.mypet.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +24,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ResponseRepository responseRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,
+                       ResponseRepository responseRepository) {
         this.userRepository = userRepository;
+        this.responseRepository = responseRepository;
     }
 
     /**
@@ -117,6 +124,5 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
     }
-
 
 }

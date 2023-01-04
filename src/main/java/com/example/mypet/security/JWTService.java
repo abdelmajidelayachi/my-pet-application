@@ -1,12 +1,17 @@
 package com.example.mypet.security;
 
 
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +24,10 @@ import java.util.function.Function;
  **/
 
 
-@Component
-public class JwtUtils {
+@Service
+public class JWTService {
 
-    private String jwtSigningKey = "secret";
+    private static String SECRET_KEY = "4D6251655468576D5A7134743777217A24432646294A404E635266556A586E32";
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -43,7 +48,17 @@ public class JwtUtils {
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     private Boolean isTokenExpired(String token){
@@ -63,7 +78,7 @@ public class JwtUtils {
                 .claim("username", userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(2)))
-                .signWith(SignatureAlgorithm.HS256, jwtSigningKey).compact();
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
     }
 
     public Boolean isTokenValid(String token, UserDetails userDetails){

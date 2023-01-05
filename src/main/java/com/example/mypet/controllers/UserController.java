@@ -28,11 +28,6 @@ public class UserController {
         return ResponseEntity.ok().body(Map.of("status", "success", "data", userService.findAllUser()));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Map<String, Object>> test() {
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", "test"));
-    }
-
     @PostMapping
     public ResponseEntity<Map<String, Object>> createUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok().body(Map.of("status", "success", "data", userService.saveUser(userRequest)));

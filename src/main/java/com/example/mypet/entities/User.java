@@ -65,6 +65,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Animal> animals;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Response> responses;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

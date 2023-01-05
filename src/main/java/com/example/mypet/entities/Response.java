@@ -1,15 +1,15 @@
 package com.example.mypet.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "responses")
 @Getter
+@Builder
 @Setter
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Response {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

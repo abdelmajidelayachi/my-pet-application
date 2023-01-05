@@ -16,6 +16,7 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final UserService userService;
 
     public List<CommentResponse> findAllComments() {
         List<CommentResponse> commentResponses = new ArrayList<>();
@@ -31,13 +32,13 @@ public class CommentService {
     }
 
     public CommentResponse saveComment(CommentRequest commentRequest) {
-        if (commentRequest.getComment() == null || commentRequest.getPostId() == null || commentRequest.getUserId() == null) {
+        if (commentRequest.getComment() == null || commentRequest.getPostId() == null) {
             throw new RuntimeException("Comment, postId and userId are required");
         }
         var comment = Comment.builder()
                 .content(commentRequest.getComment())
                 .postId(commentRequest.getPostId())
-                .userId(commentRequest.getUserId())
+                .userId(userService.findUserByEmail().getId())
                 .build();
         commentRepository.save(comment);
         return CommentResponse.builder()

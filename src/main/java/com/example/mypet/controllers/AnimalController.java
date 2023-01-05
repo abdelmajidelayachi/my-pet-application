@@ -32,6 +32,19 @@ public class AnimalController {
         return ResponseEntity.ok().body(Map.of("status", "success", "data", animalService.saveAnimal(animalRequest)));
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Map<String, Object>> updateAnimal(@PathVariable Long id, @RequestBody AnimalRequest animalRequest){
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", animalService.updateAnimal(id, animalRequest)));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Map<String, Object>> deleteAnimal(@PathVariable Long id){
+        animalService.deleteAnimal(id);
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", "Animal deleted successfully"));
+    }
+
+
+
 
 
 

@@ -17,6 +17,7 @@ import java.util.List;
 public class ResponseService {
 
     private final ResponseRepository responseRepository;
+    private final UserService userService;
 
     public List<ResponseResponse> findAllResponses(){
         List<ResponseResponse> responseResponses = new ArrayList<>();
@@ -44,13 +45,13 @@ public class ResponseService {
     }
 
     public ResponseResponse saveResponse(ResponseRequest responseRequest){
-        if(responseRequest.getMessage() == null || responseRequest.getCommentId() == null || responseRequest.getUserId() == null){
+        if(responseRequest.getMessage() == null || responseRequest.getCommentId() == null){
             throw new RuntimeException("Message, commentId and userId are required");
         }
         Response response = Response.builder()
                 .content(responseRequest.getMessage())
                 .commentId(responseRequest.getCommentId())
-                .userId(responseRequest.getUserId())
+                .userId(userService.findUserByEmail().getId())
                 .build();
         responseRepository.save(response);
         return ResponseResponse.builder()

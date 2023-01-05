@@ -14,6 +14,5 @@ public class ResponseRequest {
 
         private String message;
         private Long commentId;
-        private Long userId;
 
 }

@@ -2,6 +2,8 @@ package com.example.mypet.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Set;
 
@@ -24,7 +26,8 @@ public class Animal {
     @Column(name = "type", length = 50)
     private String type;
 
-    @Column(name = "user_id")
+
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @OneToMany(mappedBy = "animal")
@@ -32,6 +35,7 @@ public class Animal {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private User user;
 
 }

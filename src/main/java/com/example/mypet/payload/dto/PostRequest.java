@@ -13,5 +13,4 @@ public class PostRequest {
     private String description;
     private float price;
     private String type;
-    private Long userId;
 }

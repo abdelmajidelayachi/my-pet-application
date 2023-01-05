@@ -18,7 +18,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     public List<PostResponse> findAllPosts() {
         List<PostResponse> posts = new ArrayList<>();
@@ -56,6 +56,7 @@ public class PostService {
             throw new RuntimeException("All fields are required");
         }
         var post = Post.builder()
+                .userId(userService.findUserByEmail().getId())
                 .city(postRequest.getCity())
                 .days(postRequest.getDays())
                 .description(postRequest.getDescription())

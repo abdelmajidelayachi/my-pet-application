@@ -6,8 +6,11 @@ import com.example.mypet.payload.dto.UserRequest;
 import com.example.mypet.payload.objectmapper.UserMapper;
 import com.example.mypet.repositories.ResponseRepository;
 import com.example.mypet.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,17 +24,13 @@ import java.util.Optional;
  */
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final ResponseRepository responseRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository,
-                       ResponseRepository responseRepository) {
-        this.userRepository = userRepository;
-        this.responseRepository = responseRepository;
-    }
+
 
     /**
      * @return List of all users
@@ -123,6 +122,17 @@ public class UserService {
         } else {
             throw new RuntimeException("User not found");
         }
+    }
+
+    /**
+     * @return User
+     */
+
+    public User findUserByEmail() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String email = userDetails.getUsername();
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
 }

@@ -1,17 +1,17 @@
 package com.example.mypet.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "comments")
 @Setter
+@Builder
 @Getter
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Comment {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +21,20 @@ public class Comment {
     @Column(name = "content", length = 400)
     private String content;
 
-    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "post_id")
+    private Long postId;
+
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
     private Set<Response> responses;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id",insertable = false,updatable = false)
     private Post post;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",insertable = false,updatable = false)
     private User user;
 

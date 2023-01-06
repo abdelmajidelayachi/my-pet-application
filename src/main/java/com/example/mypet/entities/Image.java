@@ -19,7 +19,7 @@ public class Image {
     @Column(name = "animal_id")
     private Long animalId;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "animal_id",  updatable = false, insertable = false)
     private Animal animal;
 

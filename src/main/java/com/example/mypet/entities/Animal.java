@@ -33,7 +33,7 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     private Set<Image> images;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 

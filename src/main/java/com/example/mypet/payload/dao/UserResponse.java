@@ -1,4 +1,23 @@
 package com.example.mypet.payload.dao;
 
+import lombok.*;
+
+import java.util.List;
+
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserResponse {
+
+    private Long id;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String username;
+    private String phone;
+    private String adoptedPets;
+    private int numberOfPets;
+    private List<PostResponse> post;
 }

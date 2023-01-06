@@ -24,8 +24,6 @@ public class CommentService {
             commentResponses.add(CommentResponse.builder()
                     .id(comment.getId())
                     .comment(comment.getContent())
-                    .postId(comment.getPost().getId())
-                    .userId(comment.getUser().getId())
                     .build());
         });
         return commentResponses;
@@ -44,8 +42,7 @@ public class CommentService {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .comment(comment.getContent())
-                .postId(comment.getPost().getId())
-                .userId(comment.getUser().getId())
+                .postId(commentRequest.getPostId())
                 .build();
     }
 
@@ -57,7 +54,6 @@ public class CommentService {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .comment(comment.getContent())
-                .postId(comment.getPost().getId())
                 .userId(comment.getUser().getId())
                 .build();
     }

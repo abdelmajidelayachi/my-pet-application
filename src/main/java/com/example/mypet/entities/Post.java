@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "posts")
 @Builder
@@ -44,6 +46,9 @@ public class Post {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", updatable = false, insertable = false)
     private User user;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments;
 
 
 

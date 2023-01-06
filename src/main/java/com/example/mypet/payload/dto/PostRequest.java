@@ -2,6 +2,8 @@ package com.example.mypet.payload.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -13,4 +15,5 @@ public class PostRequest {
     private String description;
     private float price;
     private String type;
+
 }

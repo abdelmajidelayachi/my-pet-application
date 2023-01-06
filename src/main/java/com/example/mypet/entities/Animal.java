@@ -33,9 +33,8 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     private Set<Image> images;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private User user;
 
 }

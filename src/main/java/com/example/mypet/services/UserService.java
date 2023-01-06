@@ -3,19 +3,15 @@ package com.example.mypet.services;
 import com.example.mypet.entities.User;
 import com.example.mypet.payload.dao.UserResponse;
 import com.example.mypet.payload.dto.UserRequest;
-import com.example.mypet.payload.objectmapper.UserMapper;
 import com.example.mypet.repositories.ResponseRepository;
 import com.example.mypet.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,11 +32,18 @@ public class UserService {
      * @return List of all users
      */
     public List<UserResponse> findAllUser() {
-        List<UserResponse> users = ((List<User>) userRepository.findAll()).stream().map(user -> {
-            UserMapper userMapper = new UserMapper();
-            return userMapper.convertToUserResponse(user);
-        }).toList();
-        return users;
+        List<UserResponse> userResponses = new ArrayList<>();
+        userRepository.findAll().forEach(
+                user -> userResponses.add(
+                        UserResponse.builder()
+                                .id(user.getId())
+                                .email(user.getEmail())
+                                .firstname(user.getFirstname())
+                                .lastname(user.getLastname())
+                                .build()
+                )
+        );
+        return userResponses;
     }
 
     /**
@@ -48,34 +51,39 @@ public class UserService {
      * @return User by id
      */
     public UserResponse findUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        UserMapper userMapper = new UserMapper();
-        return userMapper.convertToUserResponse(user);
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return UserResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .build();
     }
 
     /**
      * @param userRequest
      * @return User
      */
-    public User saveUser(UserRequest userRequest) {
-        User user = new User();
+    public UserResponse saveUser(UserRequest userRequest) {
         if (userRequest.getFirstname() == null || userRequest.getLastname() == null || userRequest.getEmail() == null || userRequest.getPassword() == null || userRequest.getConfirmPassword() == null) {
             throw new IllegalArgumentException("Firstname, lastname, email, password and confirm password  are required");
         }
         if (!userRequest.getPassword().equals(userRequest.getConfirmPassword())) {
             throw new IllegalArgumentException("Password and confirm password must be the same");
         }
-        user.setFirstname(userRequest.getFirstname());
-        user.setLastname(userRequest.getLastname());
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(userRequest.getPassword());
-        if (userRequest.getUsername() != null) {
-            user.setUsername(userRequest.getUsername());
-        }
-        if (userRequest.getPhone() != null) {
-            user.setTel(userRequest.getPhone());
-        }
-        return userRepository.save(user);
+    User user = User.builder()
+                    .firstname(userRequest.getFirstname())
+                    .lastname(userRequest.getLastname())
+                    .email(userRequest.getEmail())
+                    .password(userRequest.getPassword())
+                    .build();
+        User savedUser = userRepository.save(user);
+        return UserResponse.builder()
+                .id(savedUser.getId())
+                .email(savedUser.getEmail())
+                .firstname(savedUser.getFirstname())
+                .lastname(savedUser.getLastname())
+                .build();
     }
 
     /**
@@ -85,6 +93,9 @@ public class UserService {
      * @return void
      */
     public void deleteUserById(Long id) {
+        if(!userRepository.existsById(id)){
+            throw new RuntimeException("User not found");
+        }
         userRepository.deleteById(id);
     }
 
@@ -96,7 +107,7 @@ public class UserService {
      * @return User
      */
     @Transactional
-    public User updateUser(UserRequest userRequest, Long id) {
+    public UserResponse updateUser(UserRequest userRequest, Long id) {
         Optional<User> userToUpdate = userRepository.findById(id);
         if (userToUpdate.isPresent()) {
             User user = userToUpdate.get();
@@ -118,7 +129,14 @@ public class UserService {
             if (userRequest.getUsername() != null) {
                 user.setUsername(userRequest.getUsername());
             }
-            return user;
+
+            return UserResponse.builder()
+                    .id(user.getId())
+                    .email(user.getEmail())
+                    .firstname(user.getFirstname())
+                    .lastname(user.getLastname())
+                    .build();
+
         } else {
             throw new RuntimeException("User not found");
         }

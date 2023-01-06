@@ -62,10 +62,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Animal> animals;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Response> responses;
 
 

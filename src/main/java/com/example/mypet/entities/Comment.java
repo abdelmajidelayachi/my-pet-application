@@ -30,7 +30,7 @@ public class Comment {
     @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Response> responses;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id",insertable = false,updatable = false)
     private Post post;
 

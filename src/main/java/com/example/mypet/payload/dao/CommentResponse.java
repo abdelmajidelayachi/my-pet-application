@@ -2,6 +2,8 @@ package com.example.mypet.payload.dao;
 
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @RequiredArgsConstructor
@@ -12,4 +14,5 @@ public class CommentResponse {
         private String comment;
         private Long postId;
         private Long userId;
+        private List<ResponseResponse> responses;
 }

@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OffersComponent } from './offers/offers.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { OfferComponent } from './components/offer/offer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OffersComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
+    OfferComponent
   ],
   imports: [
     BrowserModule,

@@ -10,9 +10,11 @@
     </div>
 
     <div class="mt-10">
-      <form action="#">
+      <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
         <div class="flex flex-col mb-5">
-          <label for="firstname" class="mb-1 text-xs tracking-wide text-gray-600"
+          <label
+            for="firstname"
+            class="mb-1 text-xs tracking-wide text-gray-600"
             >Fist Name:</label
           >
           <div class="relative">
@@ -25,10 +27,22 @@
             <input
               id="firstname"
               type="text"
-              name="firstname"
+              formControlName="firstname"
+             
               class="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               placeholder="Enter your first name"
             />
+          </div>
+          <div *ngIf="firstname?.invalid && firstname?.touched" class="text-red-500">
+            <div *ngIf="firstname?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="firstname?.errors?.['minlength']">
+              This field must have at least 3 character.
+            </div>
+            <div *ngIf="firstname?.errors?.['maxlength']">
+              This field must have at most 20 characters.
+            </div>
           </div>
         </div>
         <div class="flex flex-col mb-5">
@@ -45,10 +59,21 @@
             <input
               id="lastname"
               type="text"
-              name="lastname"
+              formControlName="lastname"
               class="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               placeholder="Enter your last name"
             />
+          </div>
+          <div *ngIf="lastname?.invalid && lastname?.touched" class="text-red-500">
+            <div *ngIf="lastname?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="lastname?.errors?.['minlength']">
+              This field must have at least 3 character.
+            </div>
+            <div *ngIf="lastname?.errors?.['maxlength']">
+              This field must have at most 20 characters.
+            </div>
           </div>
         </div>
         <div class="flex flex-col mb-5">
@@ -65,10 +90,18 @@
             <input
               id="email"
               type="email"
-              name="email"
+              formControlName="email"
               class="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               placeholder="Enter your email"
             />
+          </div>
+          <div *ngIf="email?.invalid && email?.touched" class="text-red-500">
+            <div *ngIf="email?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="email?.errors?.['email']">
+              This field must be a valid email.
+            </div>
           </div>
         </div>
         <div class="flex flex-col mb-6">
@@ -89,10 +122,21 @@
             <input
               id="password"
               type="password"
-              name="password"
+              formControlName="password"
               class="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               placeholder="Enter your password"
             />
+          </div>
+          <div *ngIf="password?.invalid && password?.touched" class="text-red-500">
+            <div *ngIf="password?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="password?.errors?.['minlength']">
+              This field must have at least 6 character.
+            </div>
+            <div *ngIf="password?.errors?.['maxlength']">
+              This field must have at most 20 characters.
+            </div>
           </div>
         </div>
         <div class="flex flex-col mb-6">
@@ -113,16 +157,27 @@
             <input
               id="password"
               type="password"
-              name="confirmPassword"
+              formControlName="confirmPassword"
               class="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               placeholder="Enter confirm password"
             />
+          </div>
+          <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="text-red-500">
+            <div *ngIf="confirmPassword?.errors?.['required']">
+              This field is required.
+            </div>
+            <div *ngIf="confirmPassword?.errors?.['minlength']">
+              This field must have at least 6 character.
+            </div>
+            <div *ngIf="confirmPassword?.errors?.['maxlength']">
+              This field must have at most 20 characters.
+            </div>
           </div>
         </div>
 
         <div class="flex w-full">
           <button
-            type="submit"
+            type="submit" [disabled]="!registerForm.valid"
             class="flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-500 hover:bg-blue-600 rounded-2xl py-2 w-full transition duration-150 ease-in"
           >
             <span class="mr-2 uppercase">Sign up</span>
@@ -147,17 +202,17 @@
     </div>
   </div>
   <div class="flex justify-center items-center mt-6">
-    <a
-      href="#"
-      target="_blank"
+    <div
       class="inline-flex items-center text-gray-700 font-medium text-xs text-center"
     >
       <span class="ml-2"
         >You have an account?
-        <a href="#" class="text-xs ml-2 text-blue-500 font-semibold"
+        <a
+          [routerLink]="['/auth/login']"
+          class="text-xs ml-2 text-blue-500 font-semibold"
           >Sign in now</a
         ></span
       >
-    </a>
+    </div>
   </div>
 </div>

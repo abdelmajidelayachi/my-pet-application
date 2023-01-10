@@ -22,6 +22,10 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse register(RegisterRequest registerRequest) {
+        // check if user already exists
+        if(userRepository.existsByEmail(registerRequest.getEmail())){
+            throw new RuntimeException("User already exists");
+        }
         var user = User.builder()
                 .firstname(registerRequest.getFirstname())
                 .lastname(registerRequest.getLastname())

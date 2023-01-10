@@ -1,0 +1,56 @@
+<header class="bg-gray-800 py-6">
+  <div class="container mx-auto flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-white">My Blog</h1>
+    <nav class="flex items-center">
+      <a href="#" class="px-4 text-white font-semibold hover:bg-gray-700 rounded-lg">Home</a>
+      <a href="#" class="px-4 text-white font-semibold hover:bg-gray-700 rounded-lg">About</a>
+      <a href="#" class="px-4 text-white font-semibold hover:bg-gray-700 rounded-lg">Contact</a>
+      <div class="relative inline-block text-left">
+        <div>
+          <span class="rounded-md shadow-sm">
+            <button type="button" (click)="showModal()" class="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:text-gray-500 focus:outline-none focus:text-gray-500 focus:bg-gray-700 active:bg-gray-900">
+              <img class="w-8 h-8 rounded-full object-cover" src="https://avatars0.githubusercontent.com/u/3959008?s=460&u=1a93e6e8c02e92e67a33e44d44d42385b3e3ea0f&v=4" alt="" />
+              <span class="ml-3">
+                <span class="font-medium text-white">John Doe</span>
+                <span class="hidden md:inline-block font-normal text-white">Developer</span>
+              </span>
+            </button>
+          </span>
+        </div>
+        <div *ngIf="isModelOpen" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+          <div class="py-1 rounded-md bg-white shadow-xs">
+            <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Profile</a>
+            <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Settings</a>
+            <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Sign out</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="flex mb-4">
+  <img src="/path/to/image.jpg" alt="Post image" class="w-32 h-32 rounded-full mr-4">
+  <div class="flex-1">
+    <div class="bg-gray-300 p-4 rounded-lg shadow-lg">
+      <h3 class="font-bold text-2xl mb-2">Post Title</h3>
+      <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+      <div class="flex justify-between items-center">
+        <div class="text-gray-600 text-sm">Posted by User123</div>
+        <div class="text-gray-600 text-sm">2 hours ago</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="absolute bottom-0 w-full bg-gray-800 py-4 text-white text-center">
+  <div class="container mx-auto">
+    <p class="font-bold text-xl mb-2">Footer Title</p>
+    <ul class="flex justify-center text-sm">
+      <li class="mr-6"><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+      <li class="mr-6"><a href="#" class="text-gray-400 hover:text-white">About</a></li>
+      <li class="mr-6"><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+

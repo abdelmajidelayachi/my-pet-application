@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UiService } from '../services/ui.service';
 
 @Component({
   selector: 'app-offers',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OffersComponent implements OnInit {
 
-  constructor() { }
+  subscription !: Subscription;
+  
+  constructor(private uiService: UiService) {
+    this.subscription = this.uiService.getStateAddModal().subscribe((state) => {
+      this.modelAddModalState = state;
+    });
+   }
+
+  modelAddModalState = false;
+  
 
   ngOnInit(): void {
   }

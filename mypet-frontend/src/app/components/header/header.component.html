@@ -2,9 +2,9 @@
   <div class="container mx-auto flex items-center justify-between">
     <h1 class="text-2xl font-bold text-white">My Pet</h1>
     <nav class="flex items-center">
-      <a href="#" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Offers</a>
-      <a href="#" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Animals</a>
-      <a href="#" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Contacts</a>
+      <a [routerLink]="['Offers']" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Offers</a>
+      <a [routerLink]="['Animals']" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Animals</a>
+      <a [routerLink]="['Contacts']" class="px-4 text-white text-xl font-semibold hover:bg-gray-700 rounded-lg">Contacts</a>
       <!-- search -->
       <div class="relative mx-4">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -17,6 +17,10 @@
       </div>
      
     </nav>
+    <!-- add offer -->
+    <button type="button" (click)="onOpenAddModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Add Offer
+    </button>
     <div class="relative inline-block text-left">
       <div>
         <span class="rounded-md shadow-sm">

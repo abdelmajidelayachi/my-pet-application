@@ -23,9 +23,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/simplemde-antd/dist/simplemde.min.js"
+            ]
           },
           "configurations": {
             "production": {

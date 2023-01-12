@@ -17,143 +17,217 @@
   <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
   <div class="fixed inset-0 z-10 overflow-y-auto">
-    <div
+    <form [formGroup]="addOfferForm" (ngSubmit)="onSubmitAddOffer()"
       class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
     >
-      <!--
-        Modal panel, show/hide based on modal state.
-
-        Entering: "ease-out duration-300"
-          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          To: "opacity-100 translate-y-0 sm:scale-100"
-        Leaving: "ease-in duration-200"
-          From: "opacity-100 translate-y-0 sm:scale-100"
-          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-      -->
-      <form>
       <div
-        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl"
+        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 md:max-w-2xl sm:w-full"
       >
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="bg-white w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
-            <div
-              class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-            >
-              <!-- Heroicon name: outline/exclamation-triangle -->
-              <svg
-                class="h-6 w-6 text-red-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                />
-              </svg>
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+           
+            <div class="mt-3 text-center w-full sm:mt-0 sm:ml-4 sm:text-left">
               <h3
                 class="text-lg font-medium leading-6 text-gray-900"
                 id="modal-title"
               >
-                Deactivate account
+                Add Offer
               </h3>
-              <div class="mt-2">
-                  <div class="relative z-0 w-full mb-6 group">
-                    <input
-                      type="email"
-                      name="floating_email"
-                      id="floating_email"
-                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                      placeholder=" "
-                      required
-                    />
+              <div class="mt-4 w-full">
+                <div class="grid md:grid-cols-2 md:gap-6 mt-4">
+                  <div class="mb-4">
                     <label
-                      for="floating_email"
-                      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >Email address</label
+                      class="block text-gray-700 text-lg font-semibold mb-2 "
+                      htmlFor="title"
                     >
+                      Post Title
+                    </label>
+                    <select
+                     formControlName="offer_title"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="title"
+                      type="text"
+                    >
+                      <option disabled value="" selected>--Select-type--</option>
+                      <option value="0">Offering</option>
+                      <option value="1">Offer to take</option>
+                    </select>
+
                   </div>
-                  <div class="relative z-0 w-full mb-6 group">
-                    <input
-                      type="password"
-                      name="floating_password"
-                      id="floating_password"
-                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                      placeholder=" "
-                      required
-                    />
+                  <div class="mb-4">
                     <label
-                      for="floating_password"
-                      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >Password</label
+                      class="block text-gray-700 text-lg font-semibold mb-2 "
+                      htmlFor="name"
                     >
-                  </div>
-                  <div class="relative z-0 w-full mb-6 group">
-                    <input
-                      type="password"
-                      name="repeat_password"
-                      id="floating_repeat_password"
-                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                      placeholder=" "
-                      required
-                    />
-                    <label
-                      for="floating_repeat_password"
-                      class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >Confirm password</label
+                      Animal Type
+                    </label>
+                    <select
+                      formControlName="animal_type"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="type"
+                      type="text"
                     >
+                      <option disabled value="" selected>--Select-type--</option>
+                      <option value="cat">Cat</option>
+                      <option value="dog">Dog</option>
+                      <option value="bird">Bird</option>
+                    </select>
                   </div>
-                  <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-6 group">
-                      <input
-                        type="text"
-                        name="floating_first_name"
-                        id="floating_first_name"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        required
-                      />
-                      <label
-                        for="floating_first_name"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >First name</label
-                      >
+                  </div>
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-700 text-lg font-semibold mb-2 "
+                    htmlFor="description_of_the_offer"
+                  >
+                  Offer Description 
+                  </label>
+                  <textarea
+                    formControlName="offer_description"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="description_of_the_offer"
+                    type="text"
+                  ></textarea>
+                  <div *ngIf="offer_description?.invalid && offer_description?.touched" class="text-red-500">
+                    <div *ngIf="offer_description?.errors?.['required']">
+                      This field is required.
                     </div>
-                    <div class="relative z-0 w-full mb-6 group">
-                      <input
-                        type="text"
-                        name="floating_last_name"
-                        id="floating_last_name"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        required
-                      />
-                      <label
-                        for="floating_last_name"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >Last name</label
-                      >
+                    <div *ngIf="offer_description?.errors?.['minlength']">
+                      This field must have at least 3 character.
+                    </div>
+                    <div *ngIf="offer_description?.errors?.['maxlength']">
+                      This field must have at most 255 characters.
                     </div>
                   </div>
-                  
-                 
-                
+                </div>
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-700 text-lg font-semibold mb-2 "
+                    htmlFor="description_of_the_animal"
+                  >
+                  Animal Description
+                  </label>
+                  <textarea
+                    formControlName="animal_description"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="description_of_the_animal"
+                    type="text"
+                    ></textarea>
+                    <div *ngIf="animal_description?.invalid && animal_description?.touched" class="text-red-500">
+                      <div *ngIf="animal_description?.errors?.['required']">
+                        This field is required.
+                      </div>
+                      <div *ngIf="animal_description?.errors?.['minlength']">
+                        This field must have at least 3 character.
+                      </div>
+                      <div *ngIf="animal_description?.errors?.['maxlength']">
+                        This field must have at most 255 characters.
+                      </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6 mt-4">
+                  <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-lg font-semibold mb-2 "
+                      htmlFor="price"
+                    >
+                      Price
+                    </label>
+                    <input
+                      formControlName="offer_price"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="price"
+                      min="0"
+                      type="number"
+                    />
+                    <div *ngIf="offer_price?.invalid && offer_price?.touched" class="text-red-500">
+                      <div *ngIf="offer_price?.errors?.['required']">
+                        This field is required.
+                      </div>
+                    </div>
+                  </div>
+                 <div class="mb-4">
+                    <label
+                      class="block text-gray-700 text-lg font-semibold mb-2 "
+                      htmlFor="days"
+                    >
+                      Days
+                    </label>
+                    <input
+                      formControlName="days_of_adoption"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id ="days"
+                      min="1"
+                      type="number"
+                    />
+                    <div *ngIf="days_of_adoption?.invalid && days_of_adoption?.touched" class="text-red-500">
+                      <div *ngIf="days_of_adoption?.errors?.['required']">
+                        This field is required.
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="grid md:grid-cols-2 md:gap-6 mt-4">
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-700 text-lg font-semibold mb-2 "
+                    htmlFor="contact">
+                    Contact
+                  </label>
+                  <input
+                    formControlName="contact"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="contact"
+                    type="tel"/>
+                    <div *ngIf="contact?.invalid && contact?.touched" class="text-red-500">
+                      <div *ngIf="contact?.errors?.['required']">
+                        This field is required.
+                      </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-700 text-lg font-semibold mb-2 "
+                    htmlFor="city"
+                  >
+                    City
+                  </label>
+                  <input
+                    formControlName="city"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id ="city"
+                    type="text"
+                  />
+                  <div *ngIf="city?.invalid && city?.touched" class="text-red-500">
+                    <div *ngIf="city?.errors?.['required']">
+                      This field is required.
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="mb-4">
+                  <label
+                    class="block text-gray-700 text-lg font-semibold mb-2 "
+                    htmlFor="image"
+                  >
+                    Image
+                  </label>
+                  <ngx-dropzone (change)="onSelect($event)">
+                    <ngx-dropzone-label>Drop it</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"  [removable]="true" (removed)="onRemove(f)">
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-image-preview>
+                  </ngx-dropzone>
+                </div>                
               </div>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <button
-            type="button"
-            class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+            type="submit"
+            class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Deactivate
+            Save
           </button>
           <button
             (click)="onCloseModal()"
@@ -165,6 +239,5 @@
         </div>
       </div>
     </form>
-    </div>
   </div>
 </div>

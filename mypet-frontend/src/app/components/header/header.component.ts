@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OffersService } from 'src/app/services/offers.service';
 import { UiService } from 'src/app/services/ui.service';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +12,14 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private offersService: OffersService, private uiService: UiService) { }
+  constructor(private offersService: OffersService, private uiService: UiService, library: FaIconLibrary) {
+
+    library.addIconPacks(fas, far);
+   }
 
   isModelOpen = false;
+
+
 
   showModal(){
     this.isModelOpen = !this.isModelOpen;

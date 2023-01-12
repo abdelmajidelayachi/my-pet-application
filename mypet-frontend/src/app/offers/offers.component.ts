@@ -9,6 +9,7 @@ import { UiService } from '../services/ui.service';
 })
 export class OffersComponent implements OnInit {
 
+  modelAddModalState = false;
   subscription !: Subscription;
   
   constructor(private uiService: UiService) {
@@ -17,7 +18,6 @@ export class OffersComponent implements OnInit {
     });
    }
 
-  modelAddModalState = false;
   
 
   ngOnInit(): void {

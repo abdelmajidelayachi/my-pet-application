@@ -5,12 +5,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptors/headers.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+
   ],
   providers:[
     AuthGuard,

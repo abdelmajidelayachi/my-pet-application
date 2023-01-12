@@ -8,7 +8,10 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { OffersComponent } from './offers.component';
 import { OfferComponent } from '../components/offer/offer.component';
 import { AddOfferModalComponent } from '../components/add-offer-modal/add-offer-modal.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SimplemdeModule } from 'ngx-simplemde';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,11 +23,18 @@ import { AddOfferModalComponent } from '../components/add-offer-modal/add-offer-
     OffersPostsComponent,
     OfferDetailsComponent,
     OfferComponent,
-    AddOfferModalComponent
+    AddOfferModalComponent,
   ],
   imports: [
     CommonModule,
-    OffersRoutingModule
+    OffersRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    NgxDropzoneModule,
+    SimplemdeModule.forRoot({}),
+
+    
   ],
   bootstrap: [OffersModule]
 })

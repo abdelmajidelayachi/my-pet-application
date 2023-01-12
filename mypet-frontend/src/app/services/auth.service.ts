@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { CONSTANTS } from '../shared/constantes';
 
 @Injectable({
@@ -31,6 +30,10 @@ export class AuthService {
 
   logUserOut(){
     this.userLoggedIn = false;
+  }
+
+  getAuth(){
+    return localStorage.getItem('token');
   }
 
 

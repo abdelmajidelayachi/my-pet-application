@@ -12,8 +12,11 @@ import java.util.List;
 public class PostRequest {
     private String city;
     private int days;
-    private String description;
+    private String animal_description;
+    private String offer_description;
     private float price;
-    private String type;
-
+    private String animal_type;
+    private String contact;
+    private String title;
+    private List<String> images;
 }

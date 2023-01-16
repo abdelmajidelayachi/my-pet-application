@@ -11,5 +11,5 @@ import lombok.*;
 public class CommentRequest {
     
     private String comment;
-    private Long postId;
+    private Long offerId;
 }

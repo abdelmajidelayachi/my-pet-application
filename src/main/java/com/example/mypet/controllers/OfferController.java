@@ -2,9 +2,10 @@ package com.example.mypet.controllers;
 
 import com.example.mypet.payload.dto.OfferRequest;
 import com.example.mypet.provider.CloudinaryProvider;
-import com.example.mypet.services.ImagesRequest;
 import com.example.mypet.services.OfferService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,40 +15,36 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
-public class PostController {
+public class OfferController {
 
-    private final OfferService postService;
+    private final OfferService offerService;
     private final CloudinaryProvider cloudinaryProvider;
 
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> findAllPosts(){
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", postService.findAllPosts()));
+    public ResponseEntity<Map<String, Object>> findAllOffers() {
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", offerService.findAllOffers()));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Map<String, Object>> findPostById(@PathVariable Long id){
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", postService.findPost(id)));
+    public ResponseEntity<Map<String, Object>> findOfferById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", offerService.findOffer(id)));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<String> uploadPost(@ModelAttribute ImagesRequest imagesRequest){
-        String url = cloudinaryProvider.uploadImage(imagesRequest.getImage());
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(url);
-    }
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> createPost(@RequestBody OfferRequest postRequest){
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", postService.savePost(postRequest)));
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<Map<String, Object>> createOffer(@ModelAttribute OfferRequest offerRequest) {
+        System.out.println(offerRequest);
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", offerService.saveOffer(offerRequest)));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Map<String, Object>> updatePost(@PathVariable Long id, @RequestBody OfferRequest postRequest){
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", postService.updatePost(id, postRequest)));
+    public ResponseEntity<Map<String, Object>> updateOffer(@PathVariable Long id, @RequestBody OfferRequest offerRequest) {
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", offerService.updateOffer(id, offerRequest)));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Object>> deletePost(@PathVariable Long id){
-        return ResponseEntity.ok().body(Map.of("status", "success", "data", "Post deleted successfully"));
+    public ResponseEntity<Map<String, Object>> deleteOffer(@PathVariable Long id) {
+        return ResponseEntity.ok().body(Map.of("status", "success", "data", "Offer deleted successfully"));
     }
 
 }

@@ -24,15 +24,12 @@ public class Comment {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "post_id")
-    private Long postId;
-
     @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
     private Set<Response> responses;
 
+    @JoinColumn(name = "offer_id",insertable = false,updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id",insertable = false,updatable = false)
-    private Post post;
+    private Offer offer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",insertable = false,updatable = false)

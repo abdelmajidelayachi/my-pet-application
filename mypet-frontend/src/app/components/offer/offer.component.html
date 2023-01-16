@@ -2,39 +2,30 @@
 <!-- post card -->
 <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
   <div class="flex items-start px-4 py-6">
-     <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar">
+     <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" [src]="offer.user.avatar" alt="avatar">
      <div class="">
         <div class="flex items-center justify-between">
-           <h2 class="text-lg font-semibold text-gray-900 -mt-1">Brad Adams </h2>
+           <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{offer.user.firstname}} {{offer.user.lastname}}</h2>
            <small class="text-sm text-gray-700">22h ago</small>
         </div>
         <p class="text-gray-700">Joined 12 SEP 2012. </p>
-        <p class="mt-3 text-gray-700 text-sm">
-           Lorem ipsum, dolor sit amet conse. Saepe optio minus rem dolor sit amet!
+        <h1 class="text-semibold">{{offer.title}}</h1>
+        <p class="mt-3 text-gray-700 text-base">
+           {{offer.offer_description}}
         </p>
         <div class="flex flex-wrap justify-center">
           <div class="grid grid-flow-row md:grid-cols-3">
-            <img
-            src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+            <img *ngFor="let image of offer.images"
+            [src]="image.url"
             class="p-0.5 bg-white border bg-cover h-60"
             alt="..."
           />
-          <img
-          src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-          class="p-0.5 bg-white border bg-cover h-60"
-          alt="..."
-        />
-           
-          <img
-          src="https://images.unsplash.com/photo-1579168765467-3b235f938439?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
-          class="p-0.5 bg-white border bg-cover h-60"
-          alt="..."
-        />
+      
           </div>
           
         </div>
         <div class="mt-4 flex items-center">
-           <div class="flex mr-2 text-gray-700 text-sm mr-3">
+           <div class="flex text-gray-700 text-sm mr-3">
               <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                </svg>
@@ -46,7 +37,7 @@
               </svg>
               <span>8</span>
            </div>
-           <div class="flex mr-2 text-gray-700 text-sm mr-4">
+           <div class="flex text-gray-700 text-sm mr-4">
               <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
                </svg>

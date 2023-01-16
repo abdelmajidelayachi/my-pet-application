@@ -4,6 +4,7 @@ import com.example.mypet.entities.Comment;
 import com.example.mypet.payload.dao.CommentResponse;
 import com.example.mypet.payload.dto.CommentRequest;
 import com.example.mypet.repositories.CommentRepository;
+import com.example.mypet.repositories.OfferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final OfferRepository offerRepository;
     private final UserService userService;
 
     public List<CommentResponse> findAllComments() {
@@ -30,19 +32,19 @@ public class CommentService {
     }
 
     public CommentResponse saveComment(CommentRequest commentRequest) {
-        if (commentRequest.getComment() == null || commentRequest.getPostId() == null) {
+        if (commentRequest.getComment() == null || commentRequest.getOfferId() == null) {
             throw new RuntimeException("Comment, postId and userId are required");
         }
         var comment = Comment.builder()
                 .content(commentRequest.getComment())
-                .postId(commentRequest.getPostId())
+                .offer(offerRepository.findById(commentRequest.getOfferId()).orElseThrow(() -> new RuntimeException("Offer not found")))
                 .userId(userService.findUserByEmail().getId())
                 .build();
         commentRepository.save(comment);
         return CommentResponse.builder()
                 .id(comment.getId())
                 .comment(comment.getContent())
-                .postId(commentRequest.getPostId())
+                .postId(comment.getOffer().getId())
                 .build();
     }
 
@@ -72,7 +74,7 @@ public class CommentService {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .comment(comment.getContent())
-                .postId(comment.getPost().getId())
+                .postId(comment.getOffer().getId())
                 .userId(comment.getUser().getId())
                 .build();
     }

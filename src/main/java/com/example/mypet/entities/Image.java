@@ -1,26 +1,27 @@
 package com.example.mypet.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
+@Getter
+@Setter
 @Table(name = "images")
 public class Image {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private Long id;
 
-    @Column(name = "name", length = 50)
-    private String name;
+    @Column(name = "url", length = 255)
+    private String url;
 
-    @Lob
-    @Column(name = "content", length = 100000)
-    private byte[] content;
 
-    @Column(name = "animal_id")
-    private Long animalId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "animal_id",  updatable = false, insertable = false)
-    private Animal animal;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
 }

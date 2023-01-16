@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -53,17 +52,18 @@ public class User implements UserDetails {
     @Column(name = "adopted_pets", length = 250)
     private String adoptedPets="";
 
+    @Column(name = "avatar", insertable = false, columnDefinition = "varchar(255) default 'https://res.cloudinary.com/mypet-api-images/image/upload/v1673537084/ibjv0dfbpqwgwneua663.png'")
+    private String avatar;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Post> posts;
+    private Set<Offer> offers;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Animal> animals;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Response> responses;

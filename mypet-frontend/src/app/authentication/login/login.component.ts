@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   registerForm !: FormGroup;
 
@@ -36,10 +36,13 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.authService.loginUser(this.registerForm.value).subscribe(
       (res: any) => {
-        console.log(res.data);
+        this.authService.setCredentials(res.token);
+        this.router.navigate(['/offers']);
       }
     )
   }
+
+
 
 
 }

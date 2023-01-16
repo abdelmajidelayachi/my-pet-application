@@ -36,7 +36,6 @@ public class UserService {
         userRepository.findAll().forEach(
                 user -> userResponses.add(
                         UserResponse.builder()
-                                .id(user.getId())
                                 .email(user.getEmail())
                                 .firstname(user.getFirstname())
                                 .lastname(user.getLastname())
@@ -53,7 +52,6 @@ public class UserService {
     public UserResponse findUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         return UserResponse.builder()
-                .id(user.getId())
                 .email(user.getEmail())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
@@ -79,7 +77,6 @@ public class UserService {
                     .build();
         User savedUser = userRepository.save(user);
         return UserResponse.builder()
-                .id(savedUser.getId())
                 .email(savedUser.getEmail())
                 .firstname(savedUser.getFirstname())
                 .lastname(savedUser.getLastname())
@@ -131,7 +128,6 @@ public class UserService {
             }
 
             return UserResponse.builder()
-                    .id(user.getId())
                     .email(user.getEmail())
                     .firstname(user.getFirstname())
                     .lastname(user.getLastname())
